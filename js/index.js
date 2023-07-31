@@ -52,6 +52,10 @@ function includeEventLister(elementType) {
   return;
 }
 
+function insertAfter(referenceNode, newNode) {
+  referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling);
+}
+
 /**
  * 
  * @param {t} t is the 'this' element on which the click event called
@@ -94,7 +98,15 @@ function addElement(t) {
   }
 
   // Append element into the carrier
-  document.getElementById("field-carrier").innerHTML += field;
+
+  let lastChild = document.getElementById("field-carrier").lastChild;
+  
+  if (lastChild == null) {
+    document.getElementById("field-carrier").innerHTML += field;
+  } else {
+    let fieldDOM  = new DOMParser().parseFromString(field, "text/html");
+    insertAfter(lastChild, fieldDOM.documentElement);
+  }
   
   document.getElementById("preview-carrier").innerHTML += preview;
   
