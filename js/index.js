@@ -102,6 +102,7 @@ function addElement(t) {
   t.innerText = "Remove "+elementType;
   t.classList.remove("add-field");
   t.classList.add("remove-field");
+  
   includeEventLister(elementType);
 
   return;
@@ -115,6 +116,8 @@ function addElement(t) {
 function removeElement(t) {
   let elementType = t.dataset.el; // get data-el value which is our target element identifier
   document.getElementById(elementType+'-carrier').remove();
+  
+  document.getElementById(elementType+'-preview').remove();
   
   // Updating the button
   t.innerText = "Add "+elementType;
